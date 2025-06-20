@@ -1,18 +1,70 @@
 """
-PhantomHunter Model Components
-
-This package contains all the model components for the PhantomHunter
-AI-generated text detection system.
+Models package for PhantomHunter
+Exports all essential components for comprehensive AI-generated text detection
 """
+
+from .phantom_hunter import (
+    PhantomHunter,
+    WatermarkDetector,
+    StatisticalWatermarkDetector,
+    FrequencyWatermarkDetector,
+    SourceAttributionModule,
+    StyleEncoder,
+    UncertaintyEstimator
+)
 
 from .feature_extractor import BaseProbabilityFeatureExtractor
 from .family_encoder import ContrastiveFamilyEncoder
 from .moe_detector import MixtureOfExpertsDetector
-from .phantom_hunter import PhantomHunter
+
+from .adversarial import (
+    TextAttacks,
+    AdversarialTraining,
+    ConsistencyRegularizer,
+    DiversityRegularizer
+)
+
+from .explainability import (
+    PhantomHunterExplainer,
+    GradientBasedExplainer,
+    IntegratedGradientsExplainer,
+    AttentionExplainer,
+    GradCAMExplainer,
+    ConfidenceEstimator,
+    FeatureImportanceAnalyzer
+)
 
 __all__ = [
+    # Core model
+    'PhantomHunter',
+    
+    # Feature components
     'BaseProbabilityFeatureExtractor',
     'ContrastiveFamilyEncoder', 
     'MixtureOfExpertsDetector',
-    'PhantomHunter'
+    
+    # Watermark detection
+    'WatermarkDetector',
+    'StatisticalWatermarkDetector',
+    'FrequencyWatermarkDetector',
+    
+    # Source attribution
+    'SourceAttributionModule',
+    'StyleEncoder',
+    'UncertaintyEstimator',
+    
+    # Adversarial robustness
+    'TextAttacks',
+    'AdversarialTraining',
+    'ConsistencyRegularizer',
+    'DiversityRegularizer',
+    
+    # Explainability
+    'PhantomHunterExplainer',
+    'GradientBasedExplainer',
+    'IntegratedGradientsExplainer',
+    'AttentionExplainer',
+    'GradCAMExplainer',
+    'ConfidenceEstimator',
+    'FeatureImportanceAnalyzer'
 ] 
