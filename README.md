@@ -286,12 +286,6 @@ If you use PhantomHunter in your research, please cite:
 }
 ```
 
-## 📞 Contact
-
-- **Author**: [Your Name]
-- **Email**: [your.email@example.com]
-- **GitHub**: [https://github.com/your-username]
-- **Paper**: [Link to paper when published]
 
 ## 📋 License
 
