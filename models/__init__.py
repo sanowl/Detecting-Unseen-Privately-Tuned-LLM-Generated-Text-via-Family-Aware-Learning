@@ -28,8 +28,7 @@ from .explainability import (
     PhantomHunterExplainer,
     GradientBasedExplainer,
     IntegratedGradientsExplainer,
-    AttentionExplainer,
-    GradCAMExplainer,
+    AttentionBasedExplainer,
     ConfidenceEstimator,
     FeatureImportanceAnalyzer
 )
@@ -63,8 +62,7 @@ __all__ = [
     'PhantomHunterExplainer',
     'GradientBasedExplainer',
     'IntegratedGradientsExplainer',
-    'AttentionExplainer',
-    'GradCAMExplainer',
+    'AttentionBasedExplainer',
     'ConfidenceEstimator',
     'FeatureImportanceAnalyzer'
 ] 

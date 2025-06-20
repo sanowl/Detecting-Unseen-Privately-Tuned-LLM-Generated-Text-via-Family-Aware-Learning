@@ -18,6 +18,8 @@ class PhantomHunterConfig:
         
         # Feature extraction parameters
         self.feature_dim = 768
+        self.num_cnn_layers = 3
+        self.num_transformer_layers = 6
         self.num_attention_heads = 12
         self.num_layers = 6
         self.intermediate_size = 3072

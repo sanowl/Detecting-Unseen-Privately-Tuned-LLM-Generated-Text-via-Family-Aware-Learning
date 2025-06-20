@@ -24,6 +24,8 @@ from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from contextlib import asynccontextmanager
 import uvicorn
+import numpy as np
+import torch
 
 from config import PhantomHunterConfig
 from models import PhantomHunter
