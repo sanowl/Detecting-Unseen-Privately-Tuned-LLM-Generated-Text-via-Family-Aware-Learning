@@ -9,7 +9,6 @@ import torch.nn.functional as F
 import numpy as np
 from typing import List, Dict, Optional, Tuple, Union
 import math
-import random
 import re
 from collections import defaultdict
 from transformers import AutoTokenizer, AutoModelForMaskedLM, T5ForConditionalGeneration, T5Tokenizer
@@ -20,6 +19,7 @@ import nltk
 from nltk.corpus import wordnet, stopwords
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.tag import pos_tag
+import secrets
 
 class TextAttacks:
     """Sophisticated text attack methods based on recent adversarial NLP research"""
@@ -193,38 +193,38 @@ class TextAttacks:
         
         for _ in range(num_edits):
             # Choose random token to modify
-            token_idx = random.randint(0, len(modified_tokens) - 1)
+            token_idx = secrets.SystemRandom().randint(0, len(modified_tokens) - 1)
             token = modified_tokens[token_idx]
             
             if len(token) < 2:
                 continue
             
-            operation = random.choice(operations)
+            operation = secrets.choice(operations)
             
             if operation == 'insert':
                 # Insert random character
-                pos = random.randint(0, len(token))
-                char = random.choice('abcdefghijklmnopqrstuvwxyz')
+                pos = secrets.SystemRandom().randint(0, len(token))
+                char = secrets.choice('abcdefghijklmnopqrstuvwxyz')
                 modified_token = token[:pos] + char + token[pos:]
                 
             elif operation == 'delete':
                 # Delete random character
                 if len(token) > 1:
-                    pos = random.randint(0, len(token) - 1)
+                    pos = secrets.SystemRandom().randint(0, len(token) - 1)
                     modified_token = token[:pos] + token[pos+1:]
                 else:
                     modified_token = token
                     
             elif operation == 'substitute':
                 # Substitute random character
-                pos = random.randint(0, len(token) - 1)
-                char = random.choice('abcdefghijklmnopqrstuvwxyz')
+                pos = secrets.SystemRandom().randint(0, len(token) - 1)
+                char = secrets.choice('abcdefghijklmnopqrstuvwxyz')
                 modified_token = token[:pos] + char + token[pos+1:]
                 
             elif operation == 'swap':
                 # Swap adjacent characters
                 if len(token) > 1:
-                    pos = random.randint(0, len(token) - 2)
+                    pos = secrets.SystemRandom().randint(0, len(token) - 2)
                     chars = list(token)
                     chars[pos], chars[pos+1] = chars[pos+1], chars[pos]
                     modified_token = ''.join(chars)
@@ -331,7 +331,7 @@ class TextAttacks:
         # Move adverbs to different positions
         if adverbs and len(other_tokens) > 2:
             # Insert adverb at random position
-            pos = random.randint(1, len(other_tokens) - 1)
+            pos = secrets.SystemRandom().randint(1, len(other_tokens) - 1)
             other_tokens.insert(pos, adverbs[0])
             return other_tokens + adverbs[1:]
         
@@ -544,10 +544,10 @@ class TextAttacks:
         modified_tokens = []
         
         for token in tokens:
-            if random.random() < 0.1 and len(token) > 3:  # 10% substitution rate
+            if secrets.SystemRandom().random() < 0.1 and len(token) > 3:  # 10% substitution rate
                 candidates = self._get_synonym_candidates(token, "")
                 if candidates:
-                    modified_tokens.append(random.choice(candidates))
+                    modified_tokens.append(secrets.choice(candidates))
                 else:
                     modified_tokens.append(token)
             else:
@@ -602,7 +602,7 @@ class AdversarialTraining(nn.Module):
         original_outputs = self.base_model(texts)
         
         # Generate adversarial examples
-        if self.training and random.random() < self.attack_config['attack_probability']:
+        if self.training and secrets.SystemRandom().random() < self.attack_config['attack_probability']:
             adversarial_texts = self._generate_adversarial_batch(texts)
             adversarial_outputs = self.base_model(adversarial_texts)
             
@@ -632,7 +632,7 @@ class AdversarialTraining(nn.Module):
         
         for text in texts:
             # Choose random attack type
-            attack_type = random.choice(self.attack_config['attack_types'])
+            attack_type = secrets.choice(self.attack_config['attack_types'])
             
             # Apply attack
             if attack_type == 'textfooler':
